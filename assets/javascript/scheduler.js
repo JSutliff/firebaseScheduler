@@ -62,13 +62,18 @@ db.ref().orderByChild("currentDate").on("child_added", function(snapshot){
   console.log(ss);
   var frequency = ss.frequency;
 
+  //calculate minutesAway
+  var minutesAway = moment(nextArrival, "HH:mm").diff(moment(currentTime, "HH:mm"), "minutes");
+  console.log(minutesAway);
+  var nextArrival = currentTime + frequency;
+  
   //calculate difference between current time and next arrival
   var currentTime = moment().format("HH:mm");
   // currentTime.split(':')
-  
-    var minutesAway = moment(nextArrival, "HH:mm").diff(moment(currentTime, "HH:mm"), "minutes");
-    console.log(minutesAway);
-    var nextArrival = currentTime + minutesAway;
+
+  //next arrival is current time - firstTrain % frequency
+    //caluclate nextArrival
+    //append nextArrival
 
   
   var newTableRow = $('<tr>');
@@ -76,7 +81,7 @@ db.ref().orderByChild("currentDate").on("child_added", function(snapshot){
   newTableRow.append('<td>' + ss.destination + '</td>' );
   newTableRow.append('<td>' + frequency + '</td>' );
   newTableRow.append('<td>' + nextArrival + '</td>' );
-  newTableRow.append('<td>' + minutesAway + '</td>' );
+  newTableRow.append('<td>' + (parseInt(frequency) + currentTime) + '</td>' );
   
   $('#appendTrainInfoHere').append(newTableRow);
 });
