@@ -57,7 +57,7 @@ $("#addTrainButton").on("click", function(event) {
   addNewTrain();
 });
 
-db.ref().orderByChild("currentDate").on("child_added", function(snapshot){
+db.ref().on("child_added", function(snapshot){
   var ss = snapshot.val();
   console.log(ss);
   var frequency = ss.frequency;
